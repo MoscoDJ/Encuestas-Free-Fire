@@ -8,6 +8,7 @@ import '../../services/export_service.dart';
 import '../../services/storage_service.dart';
 import '../../theme.dart';
 import '../../widgets/background_scaffold.dart';
+import 'delete_confirmation_screen.dart';
 import 'send_email_dialog.dart';
 
 class AdminScreen extends StatefulWidget {
@@ -119,55 +120,21 @@ class _AdminScreenState extends State<AdminScreen> {
   }
 
   Future<void> _confirmClear() async {
-    final ok1 = await _confirm(
-      title: '¿Borrar todas las respuestas?',
-      message: 'Se eliminarán ${_responses.length} encuestas. No se puede deshacer.',
-      confirmLabel: 'Borrar',
-      danger: true,
-    );
-    if (ok1 != true) return;
-    final ok2 = await _confirm(
-      title: '¿De verdad?',
-      message: 'Confirma una segunda vez para continuar.',
-      confirmLabel: 'Sí, borrar todo',
-      danger: true,
-    );
-    if (ok2 != true) return;
-    await _storage.clear();
-    await _load();
-    _snack('Datos borrados', ok: true);
-  }
-
-  Future<bool?> _confirm({
-    required String title,
-    required String message,
-    required String confirmLabel,
-    bool danger = false,
-  }) {
-    return showDialog<bool>(
-      context: context,
-      builder: (_) => AlertDialog(
-        backgroundColor: AppColors.surfaceSolid,
-        title: Text(title, style: const TextStyle(color: Colors.white)),
-        content: Text(message,
-            style: const TextStyle(color: AppColors.textSecondary, fontSize: 18)),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Cancelar',
-                style: TextStyle(color: AppColors.textSecondary, fontSize: 18)),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  danger ? AppColors.danger : AppColors.primary,
-            ),
-            onPressed: () => Navigator.of(context).pop(true),
-            child: Text(confirmLabel),
-          ),
-        ],
+    final total = _responses.length;
+    final confirmed = await Navigator.of(context).push<bool>(
+      PageRouteBuilder(
+        opaque: true,
+        barrierDismissible: false,
+        pageBuilder: (_, _, _) =>
+            DeleteConfirmationScreen(totalResponses: total),
+        transitionsBuilder: (_, animation, _, child) =>
+            FadeTransition(opacity: animation, child: child),
       ),
     );
+    if (confirmed != true) return;
+    await _storage.clear();
+    await _load();
+    _snack('$total registros borrados', ok: true);
   }
 
   void _snack(String message, {bool ok = false}) {
@@ -184,7 +151,7 @@ class _AdminScreenState extends State<AdminScreen> {
   Widget build(BuildContext context) {
     return BackgroundScaffold(
       child: Padding(
-        padding: const EdgeInsets.all(32),
+        padding: const EdgeInsets.fromLTRB(32, kLogoReservedHeight, 32, 32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -337,10 +304,10 @@ class _AdminScreenState extends State<AdminScreen> {
               const SizedBox(height: 12),
               OutlinedButton.icon(
                 onPressed: _working || total == 0 ? null : _confirmClear,
-                icon: const Icon(Icons.delete_outline_rounded,
+                icon: const Icon(Icons.delete_forever_rounded,
                     color: AppColors.danger),
                 label: const Text(
-                  'Borrar todo',
+                  'Borrar TODOS los registros',
                   style: TextStyle(color: AppColors.danger),
                 ),
                 style: OutlinedButton.styleFrom(

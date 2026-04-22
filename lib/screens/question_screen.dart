@@ -84,7 +84,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
     return BackgroundScaffold(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 32),
+        padding: const EdgeInsets.fromLTRB(64, kLogoReservedHeight, 64, 32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

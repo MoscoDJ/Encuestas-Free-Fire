@@ -38,9 +38,9 @@ class _ThankYouScreenState extends State<ThankYouScreen> {
   @override
   Widget build(BuildContext context) {
     return BackgroundScaffold(
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(48),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(48, kLogoReservedHeight, 48, 48),
+        child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

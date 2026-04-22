@@ -29,83 +29,78 @@ class WelcomeScreen extends StatelessWidget {
     return HiddenCornerDetector(
       onUnlock: () => _openAdmin(context),
       child: BackgroundScaffold(
-        child: Padding(
-          padding: const EdgeInsets.all(48),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Spacer(),
-              const Text(
-                'Casa del Yeti',
-                style: TextStyle(
-                  fontSize: 96,
-                  fontWeight: FontWeight.w900,
-                  color: Colors.white,
-                  letterSpacing: 2,
-                  shadows: [
-                    Shadow(
-                      color: Colors.black87,
-                      offset: Offset(0, 4),
-                      blurRadius: 12,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
-              Text(
-                'Cuéntanos tu experiencia',
-                style: TextStyle(
-                  fontSize: 36,
-                  color: Colors.white.withValues(alpha: 0.92),
-                  fontWeight: FontWeight.w400,
-                  shadows: const [
-                    Shadow(
-                      color: Colors.black54,
-                      offset: Offset(0, 2),
-                      blurRadius: 8,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 64),
-              SizedBox(
-                height: 110,
-                child: ElevatedButton.icon(
-                  onPressed: () => _start(context),
-                  icon: const Icon(Icons.play_arrow_rounded, size: 44),
-                  label: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    child: Text(
-                      'Comenzar encuesta',
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: kLogoReservedHeight),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 48),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Cuéntanos tu experiencia',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 36,
-                        fontWeight: FontWeight.w800,
+                        fontSize: 44,
+                        color: Colors.white.withValues(alpha: 0.95),
+                        fontWeight: FontWeight.w600,
+                        shadows: const [
+                          Shadow(
+                            color: Colors.black87,
+                            offset: Offset(0, 3),
+                            blurRadius: 10,
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 56, vertical: 28),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
+                    const SizedBox(height: 48),
+                    ElevatedButton.icon(
+                      onPressed: () => _start(context),
+                      icon: const Icon(Icons.play_arrow_rounded, size: 44),
+                      label: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 24),
+                        child: Text(
+                          'Comenzar encuesta',
+                          style: TextStyle(
+                            fontSize: 36,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 56, vertical: 28),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        elevation: 12,
+                      ),
                     ),
-                    elevation: 12,
-                  ),
+                    const SizedBox(height: 24),
+                    Text(
+                      'Dura menos de 1 minuto',
+                      style: TextStyle(
+                        color: Colors.white.withValues(alpha: 0.8),
+                        fontSize: 22,
+                        shadows: const [
+                          Shadow(
+                            color: Colors.black54,
+                            offset: Offset(0, 2),
+                            blurRadius: 6,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              const Spacer(),
-              Text(
-                'Dura menos de 1 minuto',
-                style: TextStyle(
-                  color: Colors.white.withValues(alpha: 0.75),
-                  fontSize: 22,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

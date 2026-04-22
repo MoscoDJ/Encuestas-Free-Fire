@@ -28,9 +28,14 @@ class BackgroundScaffold extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
+                  // Mantenemos el tercio superior (donde vive el logo del
+                  // fondo) limpio, y oscurecemos la zona donde ponemos
+                  // contenido para asegurar contraste del texto.
+                  stops: [0.0, 0.33, 1.0],
                   colors: [
-                    Color(0x80000000),
-                    Color(0xCC000000),
+                    Color(0x00000000),
+                    Color(0x66000000),
+                    Color(0xB3000000),
                   ],
                 ),
               ),

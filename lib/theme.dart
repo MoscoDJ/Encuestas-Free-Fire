@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// Altura reservada en la parte superior de todas las pantallas para no
+/// solaparse con el logo que viene impreso en el fondo del tablet.
+const double kLogoReservedHeight = 350.0;
+
 class AppColors {
   static const Color primary = Color(0xFFFF6B00); // Free Fire orange
   static const Color primaryDark = Color(0xFFD24F00);
