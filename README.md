@@ -27,11 +27,35 @@ Necesitas:
 - Una API Key de SendGrid con permiso `Mail Send` ([docs](https://docs.sendgrid.com/api-reference/mail-send/mail-send)).
 - Un remitente (email + nombre) verificado en SendGrid (Single Sender o Domain Auth).
 
+### 1. Configurar credenciales
+
+Crea `secrets/sendgrid.json` (gitignored) copiando la plantilla y rellenando los valores:
+
 ```bash
-flutter build apk --release \
-  --dart-define=SENDGRID_API_KEY=SG.xxxxxxxx \
-  --dart-define=SENDGRID_FROM=no-reply@tudominio.com \
-  --dart-define=SENDGRID_FROM_NAME="Casa del Yeti"
+cp secrets/sendgrid.example.json secrets/sendgrid.json
+# edita secrets/sendgrid.json con tu API key y remitente verificado
+```
+
+El archivo tiene esta estructura:
+
+```json
+{
+  "SENDGRID_API_KEY": "SG.xxxxxxxxxxxxxxxxxxxx",
+  "SENDGRID_FROM": "no-reply@tudominio.com",
+  "SENDGRID_FROM_NAME": "Casa del Yeti"
+}
+```
+
+### 2. Build
+
+```bash
+flutter build apk --release --dart-define-from-file=secrets/sendgrid.json
+```
+
+Run en dispositivo con credenciales cargadas:
+
+```bash
+flutter run --release --dart-define-from-file=secrets/sendgrid.json
 ```
 
 El APK firmado queda en `build/app/outputs/flutter-apk/app-release.apk`.

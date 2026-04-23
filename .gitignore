@@ -10,6 +10,11 @@
 .idea/
 *.iml
 
+# Secrets (API keys, SendGrid credentials, etc.)
+/secrets/*
+!/secrets/sendgrid.example.json
+!/secrets/.gitkeep
+
 
 
 # Flutter repo-specific
